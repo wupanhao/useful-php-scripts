@@ -1,0 +1,24 @@
+.separate{border-collapse:separate;}
+.collapse{border-collapse:collapse;}
+.background{ background:url(/var/www/images/saber3.jpg) no-repeat;padding:10px} 
+.transparent{ padding:5px; 
+filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6} 
+.form-group{
+padding:1px }
+.button{ 
+    background-color: #008CBA ;
+/*#4CAF50 Green ; #008CBA Blue ; #f44336 Red ; #e7e7e7  Gray ; #555555 Black */ 
+  -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 3px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;}
+.button:hover {
+box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+body{font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif}

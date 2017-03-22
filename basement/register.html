@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<title>北师大信息科学与技术学院地下室自助预约系统</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<!--link rel="stylesheet" type="text/css"  href="includes/style.css"-->
+   <link href="css/bootstrap.min.css" rel="stylesheet">
+   <script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	function check_function() {
+	        var start_time = document.getElementById("start_time");
+	        document.write(start_time.value);
+	       // var pass2 = document.getElementById("password2");
+	       // if (pass1.value != pass2.value){
+	       //    pass1.setCustomValidity("两次输入的密码不匹配");
+	       // }
+	        //else{
+	         //   pass1.setCustomValidity("");
+	      //  }
+	    }
+
+	</script>
+</head>
+<body>
+<div class="container">
+<div class="row">
+<h1>信息科学与技术学院地下办公室自助预约系统<small> Powered by : Ekinghao </small></h1>
+<div name="instruction" class="col-xs-12" ><p><br>
+	欢迎使用信息科学与技术学院地下办公室自助预约系统,欲预约请按照要求格式填写表格，确保各项信息准确无误。<br>
+	<b style="color:red">提供虚假联系人信息或冒用其他部门账号者，一旦发现，封号处理！</b><br>
+	如您的浏览器不支持HTML5控件，请按如下格式填写表单:<br>
+	日期:"YYYY-MM-DD"如"2016-08-16",只能预约最近10天<br>
+	时间"HH:MM"如"10:00",以10分钟为最小单位,不足10分钟舍去,最长不超过3小时。<br>
+        各使用机构忘记或修改密码请联系信科分团委学术竞赛部；<br>
+        其他机构申请使用地下办公室者请联系信科学生会办公室。<br>
+        联系人：高鹤文<br>
+        qq：346146752<br>
+</p></div>
+</div>
+<div class="row">
+<div class="col-xs-12">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">地下室预约登记表</h3>
+    </div>
+    <div class="panel-body">
+<form action="register_process.php" method="POST" name="register" id="register"><fieldset>
+<div class="form-group form-inline">
+<label class="col-xs-4"   for="team_name">团体名</label class="col-xs-4" >
+<select class="form-control"  name="team_name">
+	<option value="主席团">主席团</option>
+	<option value="办公室">办公室</option>
+	<option value="宣传部">宣传部</option>
+	<option value="公关部">公关部</option>
+	<option value="权益部">权益部</option>
+	<option value="学业部">学业部</option>
+	<option value="文艺部">文艺部</option>
+	<option value="体育部">体育部</option>
+	<option value="组织部">组织部</option>
+	<option value="新闻部">新闻部</option>
+	<option value="学竞部">学竞部</option>
+	<option value="实践部">实践部</option>
+	<option value="辩论队">辩论队</option>
+	<option value="各球队">各球队</option>
+	<option value="其他类">其他类</option>
+</select>
+	</div>
+	<div class="form-group form-inline" >
+	<label class="col-xs-4"  for="reason">借用原因</label class="col-xs-4" >
+	<textarea class="form-control" id="reason" name="reason" rows="3" col="20" maxlength="100"  required="required"></textarea>
+	</div>
+	<div class="form-group form-inline">
+	<label class="col-xs-4"  for="date">日期</label class="col-xs-4" >
+	<input class="form-control" type="date" id="date" name="date"  value="" required="required">
+		</div>
+		<div class="form-group form-inline">
+		<label class="col-xs-4"  for="rom">房间</label class="col-xs-4" >
+		<select class="form-control" name="rom" id="rom" >
+		<option value="西厅">西厅</option>
+		<option value="中厅">中厅</option>
+		<option value="东厅">东厅</option>
+		</select>
+		</div>
+		<div class="form-group form-inline">
+		<label class="col-xs-4"  for="start_time">开始时间</label class="col-xs-4" >
+		<input class="form-control" type="time" id="start_time" name="start_time"  value="" required="required">
+			</div>
+	<div class="form-group form-inline">
+	<label class="col-xs-4"  for="end_time">结束时间</label class="col-xs-4" >
+	<input class="form-control" type="time" id="end_time" name="end_time"  value="" required="required">
+		</div>
+	<div class="form-group form-inline">
+	<label class="col-xs-4"  for="user_name">联系人姓名</label class="col-xs-4" >
+	<input class="form-control"  type="text" id="user_name" name="user_name" maxlength="10" value="" required="required">
+		</div>
+	<div class="form-group form-inline">
+	<label class="col-xs-4"  for="student_ID">联系人学号</label class="col-xs-4" >
+	<input class="form-control" type="text" id="student_ID" name="student_ID" maxlength="12" pattern="^20\d{10}" value="" required="required">
+		</div>
+<div class="form-group form-inline">
+<label class="col-xs-4"  for="tel">联系电话</label class="col-xs-4" >
+<input class="form-control"  id="tel" name="tel" maxlength="11" value="" pattern="^1\d{10}" required="required" >
+	</div>
+	<div class="form-group form-inline">
+	<label class="col-xs-4"  for="passwd">口令</label class="col-xs-4" >
+	<input class="form-control" type="password" id="passwd" name="passwd" maxlength="20" value=""  required="required" >
+		</div>
+<div class="center-block">
+<input type="submit" class="btn btn-primary btn-default" value="登记" >
+<input type="reset" class="btn btn-default col-xs-offset-1" value="重填">
+</div>
+</fieldset></form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</body>
+
+<script>
+tel.oninput=function(){
+  tel.setCustomValidity("");
+};
+tel.oninvalid=function(){
+  tel.setCustomValidity("请不要输入火星的手机号好吗？");
+};
+</script>
+
+</html>
