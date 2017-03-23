@@ -18,7 +18,6 @@
 <h1>信息科学与技术学院地下室预约记录</h1>
 
 <?php
-include_once("includes/sql_connect.php");
 $today=date("Y-m-d");
 $roms=array("东厅","西厅","中厅");
 $days=array('0','1','2','3','4','5','6','7','8','9');
@@ -30,6 +29,11 @@ foreach ($days as $day) {
 	echo '<td>'.$date.'</td>';
 }
 	echo '</tr>';
+$pdo = new PDO("sqlite:/var/www/bm.db");
+//获取数据表列表#仅显示自建表，系统表不显示。
+//$rows = $pdo->query("select * from register")->fetchAll(PDO::FETCH_ASSOC );
+//获取索引列表
+
 
 foreach ($roms as $rom) {
 	echo '<tr><td>'.$rom.'</td>';
@@ -37,9 +41,10 @@ foreach ($roms as $rom) {
 	$date=date("Y-m-d",strtotime("+$day day"));
 	echo '<td>';
 	$q="SELECT team_name,start,end FROM register WHERE date='$date' AND rom='$rom' order by start";
-	$r=@mysqli_query($mysql,$q);
-	if($r){
-	while($row=mysqli_fetch_array($r,MYSQLI_ASSOC)){
+	//$r=@mysqli_query($mysql,$q);
+	$rows = $pdo->query($q)->fetchAll(PDO::FETCH_ASSOC );
+	
+	foreach($rows as $row){
 		//var_dump($row);
 		$time=mktime((int)($row['start']/6),($row['start']%6)*10,0);
 		$start_time=date('H:i',$time);
@@ -47,7 +52,7 @@ foreach ($roms as $rom) {
 		$end_time=date('H:i',$time);
 		echo '【'.$row['team_name'].'】'.$start_time.'~'.$end_time.'<br>';
 			}
-		}
+		
 	echo '</td>';
 	}
 	echo "</tr>";
