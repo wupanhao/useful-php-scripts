@@ -76,21 +76,22 @@ break;
 //echo "登陆成功,正在转向首页";
 //echo '<head> <meta http-equiv="Refresh" content="1;url=http://172.16.122.8"> </head>';
 		}		//end while
+	}
 if($flag){
 $q="INSERT INTO register(team_name,reason,date,start,end,user_name,student_ID,tel,rom,create_at) VALUES('$team_name','$reason','$date','$start','$end','$user_name','$student_ID','$tel','$rom',datetime())";
 $rows = $pdo->query($q);
 //$r=@mysqli_query($mysql,$q);
 if(!$row)
-	echo "插入数据出错,请重新填写表单或联系管理员".$r.mysqli_error($mysql);
+	echo "插入数据出错,请重新填写表单或联系管理员".var_dump($row);
 else{
 	echo "信息登记成功。(请以下图表格最终显示为准）<br>
 		请按时使用并爱护地下室。——信科团学宣";
 	include_once("availability.php");
 echo "<script language=JavaScript>parent.mainFrame.location.reload();</script>";//可以刷新别的页面而不跳转
 		}
-	}	
-}//end $r
-}
+
+}//end $flag
+}// end else
 }//end post
 else
 echo "请求错误,请使用POST协议哦(昊昊么么哒)";
