@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>简易计数器</title>
+   <link href="css/bootstrap.min.css" rel="stylesheet">
+   <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+</head>
+<body>
+
+<div class="container">
+   <div class="row" >
+   <h6 id="allert"></h6>
+
+
+      <div class="form-group">
+      <h1>简易计数器<small> Powered by : Ekinghao </small></h1>
+         <input type="text" class="form-control" id="name" name="name"
+            placeholder="请输入待计数的项目，以空格分隔" required>
+      </div>
+
+      <button  class="btn btn-default" id="submit" onclick="init()">计数初始化</button>
+      <h6><font size="3" color="red">说明：一旦初始化将禁用此按钮，若需重新计数请手动刷新</font></h6>
+
+
+<hr>
+
+      <div id="counter" ></div>
+
+   </div>
+</div>
+<script type="text/javascript">
+
+function sub(n){
+   if(parseInt(document.getElementById("h"+n).innerText) > 0)
+   document.getElementById("h"+n).innerText=parseInt(document.getElementById("h"+n).innerText) - 1;
+//document.write(document.getElementById("h"+n).innerText);
+}
+
+function add(n){
+  // if(document.getElementById("h"+n).value)
+   document.getElementById("h"+n).innerText=parseInt(document.getElementById("h"+n).innerText) + 1;
+//document.write(n);
+
+}
+
+function init(){
+  // var myForm = document.getElementById('myForm');
+
+   var names = document.getElementById("name").value.split(' ');
+if(names==""){
+   document.getElementById("allert").innerHTML='<h6 class="alert alert-danger">错误！请填入待计数的项目</h6>';
+   return ;
+}
+document.getElementById("allert").innerHTML="";
+   var html = "";
+   var patt1=new RegExp("^[\S]");
+   var len=0;
+   var indexes=new Array();
+   for (i=0;i<names.length;i++){
+      if (names[i]){
+         indexes[len]=i;
+         len++;
+
+      }
+   }
+   var cols = 2;
+   if(len < 6 )
+   cols = parseInt(12 / len);
+   var n = 12 / cols;
+   var rows = parseInt(len / n) + 1;
+   for (var i=0;i<rows;i++)
+   {
+      html+='<div class="row">';
+      for (var j=0 ;j < n && i*n+j < len;j++){
+         var index = indexes[i*n+j];
+         html+='\
+<div class="col-xs-' + cols +'"><button  class="btn" id=sub"' + index + '" onclick="sub('+index+')">' + '<span class="glyphicon glyphicon-minus"></span>' + '</button>\
+   <h1  id="h' + index +'">' + "0" + '</h1>\
+   <button  class="btn btn-lg" id="add' + index + '" onclick="add('+index+')""><span class="glyphicon glyphicon-plus"></span><br>' + names[index] + '</button></div>';
+      }
+      html+='</div><hr>';
+   }
+      //document.write(String(rows) +' '+ String(n) +' '+String(len)) ;
+
+   var html2 = '\
+<div class="col-md-3" ><button  class="btn" name="' + "test" + '">' + "减" + '</button>\
+   <h1 >12</h1>\
+   <button  class="btn btn-lg" name="' + "test" + '">' + "test" + '</button></div>\
+   <div style="background-color:gray; width:2px;"></div>';
+
+
+   /*
+
+
+   <button type="button" class="btn btn-primary btn-lg">
+   大的原始按钮
+   </button>
+   <button type="button" class="btn btn-primary">
+   默认大小的原始按钮
+   </button>
+
+    */
+
+
+   document.getElementById("counter").innerHTML = html;
+   document.getElementById("submit").disabled=true;
+   //arrow
+}
+</script>
+</body>
+</html>

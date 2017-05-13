@@ -1,90 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title>简易web应用</title>
+   <title>Index</title>
    <link href="css/bootstrap.min.css" rel="stylesheet">
-   <script src="js/jquery.min.js"></script>
-   <script src="js/bootstrap.min.js"></script>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 </head>
 <body>
-
 <div class="container">
-   <div class="row" >
-
-      <h1>简易web应用<small> Powered by : Ekinghao </small></h1>
-
-<hr>
-   <!--nav class="navbar navbar-default" role="navigation">
-     <div class="navbar-header">
-         <a class="navbar-brand" href="#">实用web应用</a>
-      </div>
-</nav-->
-      <div class="collapse navbar-collapse" id="example-navbar-collapse">
-         <ul class="nav navbar-nav">
-            <!--li><a class="btn btn-default"  href="prize.html">抽奖</a></li>
-            <li><a class="btn btn-default" href="advanced_sort.html">排序</a></li>
-            <li><a class="btn btn-default" href="counter.html">计数器</a></li-->
+    <h1 class = "center-block">Index<small> Powered by : EkingHao</small></h1>
 <?php
-$path=trim(shell_exec("pwd"))."/";
-$arrar=scandir("$path");
-foreach($arrar as $filename){
-	if(substr($filename,-4)=="html" || substr($filename,-4)==".php")
-		echo '<li><a class="btn btn-default" href="'.$filename.'">'.$filename.'</a></li>';
+if($_GET['dir'])
+$pwd =urldecode( $_GET['dir']);
+else
+$pwd = '.';
+#$pwd = trim(shell_exec("pwd")).'/';
+
+echo '<h3>'.$pwd.'</h3>';
+$items = scandir($pwd);
+#var_dump($items);
+echo '<h3 class="list-group">Dirs</h3>';
+foreach($items as $item)
+{
+#echo $item;
+if(is_dir($pwd.'/'.$item))
+echo '<a href="?dir='.urlencode($pwd.'/'.$item).'" class="list-group-item active" >'.$item.'</a><br>';
 }
-?>	
-            <!--li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  Java
-                  <b class="caret"></b>
-               </a>
-               <ul class="dropdown-menu">
-                  <li><a href="#">jmeter</a></li>
-                  <li><a href="#">EJB</a></li>
-                  <li><a href="#">Jasper Report</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">分离的链接</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">另一个分离的链接</a></li>
-               </ul>
-            </li-->
-         </ul>
-      </div>
 
-         <nav class="navbar navbar-default" role="navigation">
-
-               <div class="navbar-header">
-               <a class="navbar-brand" href="#">给手机看的==</a>
-               </div>
-
-               <ul class="nav navbar-nav">
-
-<?php   
-$path=trim(shell_exec("pwd"))."/";
-$arrar=scandir("$path");
-foreach($arrar as $filename){
-        if(substr($filename,-4)=="html" || substr($filename,-4)==".php")
-                echo '<li><a  href="'.$filename.'">'.$filename.'</a></li>';
+echo '<h3 class="list-group">Files</h3>';
+foreach($items as $item)
+{
+#echo $item;
+if( (!is_dir($item)) &&  (substr($item,-4)=='html' || substr($item,-4)=='.php'))
+echo '<a href="'.$pwd.'/'.$item.'" class="list-group-item" >'.$item.'</a><br>';
 }
-echo '<li><a href="basement/index.php"> 地下室预约登记系统</a></li>';
-?> 
-                  <!--li><a  href="prize.html">抽奖</a></li>
-                  <li><a  href="advanced_sort.html">排序</a></li>
-                  <li><a  href="counter.html">计数器</a></li-->
-               </ul>
+?>
 
-      </nav>
-
-   </div>
 </div>
-<script type="text/javascript">
-
-
-
-
-</script>
 </body>
 </html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>简易排序工具</title>
+   <link href="css/bootstrap.min.css" rel="stylesheet">
+   <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+</head>
+<body>
+
+<div class="container">
+   <div class="row" >
+   <h6 id="allert"></h6>
+
+      <div class="form-group">
+      <h1>简易排序工具<small> Powered by : Ekinghao </small></h1>
+         <input type="text" class="form-control" id="pattern" placeholder="请输入用以匹配排序键的正则表达式，仅排序请留空" required>
+      </div>
+
+      <button  class="btn btn-default" id="submit" onclick="init(0)">仅匹配</button>
+      <button  class="btn btn-default" id="sort" onclick="init(1)">匹配并排序</button>
+      <button  class="btn btn-default" id="reverse" onclick="reverse()">逆序</button>
+      <h6><font size="3" color="red">说明：可以根据正则表达式匹配到的内容进行排序，也可以仅进行匹配</font></h6>
+
+<hr>
+
+      <div id="counter" >
+
+         <div class="row" >
+
+         <div class="col-xs-5"><textarea id="input" cols="80" rows="35" placeholder="input"></textarea></div>
+         <div class="col-xs-5 col-xs-offset-1"><textarea id="result" cols="80" rows="35" placeholder="result"></textarea></div>
+         </div>
+
+      </div>
+
+   </div>
+</div>
+<script type="text/javascript">
+
+
+
+function init(sort){
+  // var myForm = document.getElementById('myForm');
+
+   var rule = document.getElementById("pattern").value;
+   var input = document.getElementById("input").value.split('\n')
+   var html = "";
+   var pattren = new RegExp(rule);
+   var len=input.length;
+   if(input==""){
+      document.getElementById("allert").innerHTML='<h6 class="alert alert-danger">错误！请输入待处理的数据</h6>';
+      return ;
+   }
+   document.getElementById("allert").innerHTML="";
+   var match = new Array();
+   var key = new Array();
+   var j = 0;
+   for (var i=0;i<len;i++){
+      if (input[i].match(rule)){
+         match[j]=input[i];
+         key[j]=input[i].match(rule);
+         j++;
+      }
+      //html+=input[i].search(rule)+"\n";
+   }
+
+  // document.write(pattren);
+   //document.write(match);
+   if(sort)
+   for (var i = key.length - 1 ; i >= 0; i--) {
+      for (var j = i ; j>=0 ; j--){
+         if(key[i] < key[j]){
+            var temp = key[i];
+            key[i] = key[j];
+            key[j] = temp;
+            temp = match[i];
+            match[i] = match[j];
+            match[j] = temp;
+         }
+      }
+   };
+
+   if(sort && rule.length == 0){
+      for (var i = match.length - 1 ; i >= 0; i--) {
+         for (var j = i ; j>=0 ; j--){
+            if(match[i] < match[j]){
+               temp = match[i];
+               match[i] = match[j];
+               match[j] = temp;
+            }
+         }
+      };
+   }
+
+
+   for (var i =  0; i < match.length; i++) {
+      html+=match[i] + '\n';
+}
+//document.write(html);
+   /*
+
+
+   <button type="button" class="btn btn-primary btn-lg">
+   大的原始按钮
+   </button>
+   <button type="button" class="btn btn-primary">
+   默认大小的原始按钮
+   </button>
+
+    */
+
+    if(html)
+   document.getElementById("result").innerText = html;
+   //document.getElementById("submit").disabled=true;
+   //arrow
+}
+
+function reverse(){
+   var text="";
+   var result = document.getElementById("result").value.split("\n");
+   for (var i = result.length - 1; i >= 0; i--) {
+      if (result[i].length>0)
+      text+=result[i]+'\n';
+   };
+   //document.write(result);
+   document.getElementById("result").innerText = text;
+}
+
+
+</script>
+</body>
+</html>
